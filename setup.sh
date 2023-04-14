@@ -5,26 +5,6 @@ then
     exit 1
 fi
 
-if ! command -v gnome-terminal &> /dev/null; then
-    read -p "gnome-terminal is not installed. Do you want to proceed with installation? [y/n]: " choice
-    case "$choice" in y|Y )
-        echo "Downloading gnome-terminal..."
-        sudo apt-get update
-        sudo apt-get install -y gnome-terminal
-        ;;
-        
-        n|N ) 
-        echo "Exiting script."
-        exit 1
-        ;;
-
-        * ) 
-        echo "Invalid input. Exiting script."
-        exit 1
-        ;;
-    esac
-fi
-
 if ! command -v neofetch &> /dev/null; then
     read -p "neofetch is not installed. Do you want to proceed with installation? [y/n]: " choice
     case "$choice" in y|Y )
@@ -49,6 +29,25 @@ if ! command -v tripwire &> /dev/null; then
     case "$choice" in y|Y )
         echo "Downloading tripwire..."
         sudo apt-get install -y tripwire
+        ;;
+        
+        n|N ) 
+        echo "Exiting script."
+        exit 1
+        ;;
+
+        * ) 
+        echo "Invalid input. Exiting script."
+        exit 1
+        ;;
+    esac
+fi
+
+if ! command -v figlet &> /dev/null; then
+    read -p "tripwire is not installed. Do you want to proceed with installation? [y/n]: " choice
+    case "$choice" in y|Y )
+        echo "Downloading figlet..."
+        sudo apt-get install -y figlet toilet
         ;;
         
         n|N ) 
