@@ -3,7 +3,9 @@ then
     printf 'Must be run as root, exiting!\n'
     exit 1
 fi
+
 neofetch
+sleep 5
 
 twadmin --create-polfile /etc/tripwire/tw.pol
 tripwire --init
