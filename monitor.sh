@@ -1,3 +1,4 @@
+#! /bin/bash
 if [[ $EUID -ne 0 ]]
 then
     printf 'Must be run as root, exiting!\n'
@@ -10,10 +11,6 @@ sleep 5
 twadmin --create-polfile /etc/tripwire/tw.pol
 tripwire --init
 
-
-find / -name .bashrc > temp4 &
-md5sum /etc/passwd /etc/group /etc/profile md5sum /etc/sudoers /etc/hosts /etc/ssh/ssh_config /etc/ssh/sshd_config > temp2
-ls -a /etc/ /usr/ /sys/ /home/ /bin/ /etc/ssh/ >> temp2
 while true;
 do	
 	netstat -n -A inet | grep ESTABLISHED > temp
@@ -74,16 +71,7 @@ do
 	sleep 5
 	clear
 
-	sleepingProcs=$(pstree | grep sleep)
-	if [[ ! -z "$sleepingProcs" ]];then
-	echo "SLEEP PROCESSES:"
-	echo "----------------"
-	sleep 5
-	clear
-	fi
-
 	#Check for changes to important files.
-	
     echo "CHANGE IN FILES"
     echo "--------"
     tripwire --check
