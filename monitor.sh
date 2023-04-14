@@ -3,6 +3,11 @@ then
     printf 'Must be run as root, exiting!\n'
     exit 1
 fi
+neofetch
+
+twadmin --create-polfile /etc/tripwire/tw.pol
+tripwire --init
+
 
 find / -name .bashrc > temp4 &
 md5sum /etc/passwd /etc/group /etc/profile md5sum /etc/sudoers /etc/hosts /etc/ssh/ssh_config /etc/ssh/sshd_config > temp2
@@ -77,16 +82,9 @@ do
 
 	#Check for changes to important files.
 	
-	md5sum /etc/passwd /etc/group /etc/profile md5sum /etc/sudoers /etc/hosts /etc/ssh/ssh_config /etc/ssh/sshd_config > temp3
-	ls -a /etc/ /usr/ /sys/ /home/ /bin/ /etc/ssh/ >> temp3
-	fileChanges=$(diff temp2 temp3)
-	if [[ ! -z "$fileChanges" ]];then
-        echo CHANGE TRACKER:
-        echo -e "\n"
-        echo "$fileChanges"
-        sleep 5
-        clear
-	fi
+    echo "CHANGE IN FILES"
+    echo "--------"
+    tripwire --check
 
 	echo "ALIASES:"
 	echo "--------"
