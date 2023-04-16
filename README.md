@@ -14,6 +14,22 @@
 ⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠛⣿⣏⣸⡿⢿⣯⣠⣴⠿⠋⠀⠀⠀⠀⠀⠀
 ⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⠿⠶⣾⣿⣉⣡⣤⣿⠿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⢸⣿⣿⣿⣿⡿⠿⠿⠿⠶⠾⠛⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠈⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ```
 <h1>PROJECT LIMON</h1>
+
+<h2> Usage: </h2>
+limon.sh [-h] [-p] [-i] [-r] [-c] [-o]
+
+Options:
+**-h**  Print this help message
+
+**-p**  Periodically display system info
+
+**-i**  Set up for an integrity check
+
+**-r**  Restores all backed up files
+
+**-c**  Compares /etc/ files for changes
+
+**-o**  Output to /limon/outputs/YYYY_MM_DD_HH_MI.log
