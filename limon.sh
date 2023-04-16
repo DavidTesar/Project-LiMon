@@ -26,7 +26,7 @@ show_help() {
 ⠀⠀⢸⣿⣿⣿⣿⡿⠿⠿⠿⠶⠾⠛⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠈⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
     "
-    echo "Usage: $0 [-h] [-p] [-i] [-o]"
+    echo "Usage: $0 [-h] [-p] [-i] [-r] [-c] [-o]"
     echo ""
     echo "Options:"
     echo "-h  Print this help message"
