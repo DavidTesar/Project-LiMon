@@ -24,27 +24,8 @@ if ! command -v neofetch &> /dev/null; then
     esac
 fi
 
-if ! command -v tripwire &> /dev/null; then
-    read -p "tripwire is not installed. Do you want to proceed with installation? [y/n]: " choice
-    case "$choice" in y|Y )
-        echo "Downloading tripwire..."
-        sudo apt-get install -y tripwire
-        ;;
-        
-        n|N ) 
-        echo "Exiting script."
-        exit 1
-        ;;
-
-        * ) 
-        echo "Invalid input. Exiting script."
-        exit 1
-        ;;
-    esac
-fi
-
 if ! command -v figlet &> /dev/null; then
-    read -p "tripwire is not installed. Do you want to proceed with installation? [y/n]: " choice
+    read -p "figlet is not installed. Do you want to proceed with installation? [y/n]: " choice
     case "$choice" in y|Y )
         echo "Downloading figlet..."
         sudo apt-get install -y figlet toilet
@@ -63,3 +44,5 @@ if ! command -v figlet &> /dev/null; then
 fi
 
 echo "[+] all necessary software present"
+chmod +x limon.sh
+echo "[+] Limon is ready"

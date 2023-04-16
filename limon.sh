@@ -16,6 +16,8 @@ show_help() {
     echo "-h  Print this help message"
     echo "-p  Periodically display system info"
     echo "-i  Set up for an integrity check"
+    echo "-r  Restores all backed up files"
+    echo "-c  Compares /etc/ files for changes"
     echo "-o  Output to /limon/outputs/YYYY_MM_DD_HH_MI.log"
     exit 0
 }
@@ -114,11 +116,66 @@ rotate_info(){
     done
 }
 
-while getopts ":hpio" option; do
+setup_integrity(){
+    echo "[*] Copying configuration files to /limon/backup..."
+    sudo mkdir -p /limon/backup/etc/
+    sudo cp /etc/fstab /limon/backup/etc/
+    sudo cp /etc/passwd /limon/backup/etc/
+    sudo cp /etc/group /limon/backup/etc/
+    sudo cp /etc/hostname /limon/backup/etc/
+    sudo cp /etc/hosts /limon/backup/etc/
+    sudo cp /etc/resolv.conf /limon/backup/etc/
+    sudo cp /etc/sudoers /limon/backup/etc/
+    sudo cp /etc/sysctl.conf /limon/backup/etc/
+    sudo cp /etc/logrotate.conf /limon/backup/etc/
+    sudo cp /etc/crontab /limon/backup/etc/
+    sudo cp /etc/profile /limon/backup/etc/
+    
+    sudo mkdir -p /limon/backup/etc/network
+    sudo cp /etc/network/interfaces /limon/backup/etc/network/
+
+    sudo mkdir -p /limon/backup/etc/apt
+    sudo cp /etc/apt/sources.list /limon/backup/etc/apt/
+    
+    sudo mkdir -p /limon/backup/etc/ssh
+    sudo cp /etc/ssh/sshd_config /limon/backup/etc/ssh/
+
+    sudo mkdir -p /limon/backup/etc/bash
+    sudo cp /etc/bash.bashrc /limon/backup/etc/bash/
+    echo "Done!"
+}
+
+restore_integrity() {
+    echo "[*] Restoring configuration files from /limon/backup..."
+    sudo cp /limon/backup/etc/fstab /etc/
+    sudo cp /limon/backup/etc/passwd /etc/
+    sudo cp /limon/backup/etc/group /etc/
+    sudo cp /limon/backup/etc/hostname /etc/
+    sudo cp /limon/backup/etc/hosts /etc/
+    sudo cp /limon/backup/etc/network/interfaces /etc/network/
+    sudo cp /limon/backup/etc/resolv.conf /etc/
+    sudo cp /limon/backup/etc/apt/sources.list /etc/apt/
+    sudo cp /limon/backup/etc/sudoers /etc/
+    sudo cp /limon/backup/etc/ssh/sshd_config /etc/ssh/
+    sudo cp /limon/backup/etc/sysctl.conf /etc/
+    sudo cp /limon/backup/etc/logrotate.conf /etc/
+    sudo cp /limon/backup/etc/crontab /etc/
+    sudo cp /limon/backup/etc/bash/bash.bashrc /etc/bash.bashrc
+    sudo cp /limon/backup/etc/profile /etc/
+    echo "Done!"
+}
+
+check_integrity(){
+    echo "Check Integrity"
+}
+
+while getopts ":hpirco" option; do
     case "${option}" in
         h) show_help;;
         p) rotate_info;;
-        i) echo "Set up for an integrity check";;
+        i) setup_integrity;;
+        r) restore_integrity;;
+        c) check_integrity;;
         o) echo "Output to /limon/outputs/YYYY_MM_DD_HH_MI.log";;
         *) echo "Invalid option: -${OPTARG}" >&2; show_help;;
     esac
