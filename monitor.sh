@@ -96,7 +96,11 @@ rotate_info(){
         # Display information about aliases defined in the shell
         echo "ALIASES:"
         echo "--------"
-        alias
+        
+        touch /tmp/aliases
+        alias >> /tmp/aliases
+        cat /tmp/aliases
+
         echo
         sleep 5
         clear
@@ -130,7 +134,3 @@ shift $((OPTIND-1))
 
 # Maximize the terminal window
 wmctrl -r :ACTIVE: -b toggle,maximized_vert,maximized_horz
-
-# Create a new Tripwire policy file and initialize Tripwire
-twadmin --create-polfile /etc/tripwire/tw.pol
-tripwire --init
