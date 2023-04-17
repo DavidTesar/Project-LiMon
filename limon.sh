@@ -5,8 +5,7 @@ then
     exit 1
 fi
 
-# Take in arguments
-show_help() {
+show_art(){
     # Display a banner
     figlet "LiMon Debian" -c
     echo "
@@ -26,6 +25,12 @@ show_help() {
 ⠀⠀⢸⣿⣿⣿⣿⡿⠿⠿⠿⠶⠾⠛⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠈⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
     "
+}
+
+# Take in arguments
+show_help() {
+    show_art
+    
     echo "Usage: $0 [-h] [-p] [-i] [-o]"
     echo ""
     echo "Options:"
@@ -182,7 +187,44 @@ restore_integrity() {
 }
 
 check_integrity(){
-    echo "Check Integrity"
+    check_integrity() {
+        echo "[*] Checking integrity of configuration files..."
+        for file in /limon/backup/etc/*; do
+            if ! diff -q "$file" "/etc/$(basename "$file")" >/dev/null; then
+                echo "Changes detected in $(basename "$file")"
+            fi
+        done
+        for file in /limon/backup/etc/network/*; do
+            if ! diff -q "$file" "/etc/network/$(basename "$file")" >/dev/null; then
+                echo "Changes detected in $(basename "$file")"
+            fi
+        done
+        for file in /limon/backup/etc/apt/*; do
+            if ! diff -q "$file" "/etc/apt/$(basename "$file")" >/dev/null; then
+                echo "Changes detected in $(basename "$file")"
+            fi
+        done
+        for file in /limon/backup/etc/ssh/*; do
+            if ! diff -q "$file" "/etc/ssh/$(basename "$file")" >/dev/null; then
+                echo "Changes detected in $(basename "$file")"
+            fi
+        done
+        for file in /limon/backup/etc/bash/*; do
+            if ! diff -q "$file" "/etc/bash/$(basename "$file")" >/dev/null; then
+                echo "Changes detected in $(basename "$file")"
+            fi
+        done
+        echo "Done!"
+    }
+
+}
+
+generate_output(){
+    echo "[*] Generating output..."
+    log_file="/limon/outputs/$(date +"%Y_%m_%d_%H_%M_%S").log"
+    touch "$log_file"
+    check_integrity | tee "$log_file"
+    echo "Report saved to $log_file"
 }
 
 while getopts ":hpirco" option; do
@@ -192,10 +234,11 @@ while getopts ":hpirco" option; do
         i) setup_integrity;;
         r) restore_integrity;;
         c) check_integrity;;
-        o) echo "Output to /limon/outputs/YYYY_MM_DD_HH_MI.log";;
+        o) generate_output;;
         *) echo "Invalid option: -${OPTARG}" >&2; show_help;;
     esac
 done
+
 # Require at least one argument
 if [[ $# -lt 2 ]]; then
     echo "At least one argument is required"
