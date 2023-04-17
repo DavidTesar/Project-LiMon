@@ -32,4 +32,4 @@ Options:
 
 **-c**  Compares /etc/ files for changes
 
-**-o**  Output to /limon/outputs/YYYY_MM_DD_HH_MI.log
+**-o**  Output to /limon/outputs/YYYY_MM_DD_HH_MI_SS.log
