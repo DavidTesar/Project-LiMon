@@ -27,11 +27,9 @@ show_art(){
     "
 }
 
-# Take in arguments
-show_help() {
+show_help(){
     show_art
-    
-    echo "Usage: $0 [-h] [-p] [-i] [-o]"
+    echo "Usage: $0 [-h] [-p] [-i] [-r] [-c] [-o]"
     echo ""
     echo "Options:"
     echo "-h  Print this help message"
