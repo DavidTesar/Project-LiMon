@@ -25,7 +25,8 @@ The script if called with the appropriate options, periodically displays system 
 | show_help() | Displays usage information and options for the script |
 | rotate_info() | Enters an infinite loop that displays various system information using neofetch and other commands, then clears the screen and repeats after a short delay. |
 | setup_integrity() | Creates a backup directory and copies various configuration files to it. The restore_files() function restores backed up files from the backup directory.  |
-| compare_files() | Compares the /etc/ files for changes |
+| restore_integrity() | Restores backed up files if any. Use after setup_integrity command has been ran |
+| check_integrity() | Compares the /etc/ files for changes |
 
 This script is designed to help with system administration tasks, including monitoring system information, backing up and restoring important configuration files, and checking for changes to critical system files.
 
