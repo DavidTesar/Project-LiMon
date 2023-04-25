@@ -261,15 +261,3 @@ while getopts ":hpirco" option; do
         *) echo "Invalid option: -${OPTARG}" >&2; show_help;;
     esac
 done
-
-# Require at least one argument
-if [[ $# -lt 2 ]]; then
-    echo "At least one argument is required"
-    echo ""
-    show_help
-fi
-shift $((OPTIND-1))
-
-
-# Maximize the terminal window
-wmctrl -r :ACTIVE: -b toggle,maximized_vert,maximized_horz
