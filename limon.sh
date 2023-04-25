@@ -211,6 +211,10 @@ restore_integrity() {
 # Checks and displays changes within those files
 check_integrity(){
 echo "[*] Checking integrity of configuration files..."
+echo "[*] Check performed on"
+echo $(date +"%Y_%m_%d_%H_%M_%S")
+echo "---------------------------------"
+
 # /etc/passwd
     if ! diff -q "/limon/backup/etc/passwd" "/etc/passwd" >/dev/null; then
         echo "[*] Changes detected in /etc/passwd"
