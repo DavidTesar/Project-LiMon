@@ -181,8 +181,8 @@ setup_integrity(){
     sudo mkdir -p /limon/backup/etc/ssh
     sudo cp /etc/ssh/sshd_config /limon/backup/etc/ssh/
 
-    sudo mkdir -p /limon/backup/etc/bash
-    sudo cp /etc/bash.bashrc /limon/backup/etc/bash/
+    #sudo mkdir -p /limon/backup/etc/bash
+    #sudo cp /etc/bash.bashrc /limon/backup/etc/bash/
     echo "[*] Done!"
 }
 
@@ -203,7 +203,7 @@ restore_integrity() {
 
     sudo cp /limon/backup/etc/apt/sources.list /etc/apt/
     sudo cp /limon/backup/etc/network/interfaces /etc/network/
-    sudo cp /limon/backup/etc/bash.bashrc /etc/bash.bashrc
+    #sudo cp /limon/backup/etc/bash.bashrc /etc/bash.bashrc
     sudo cp /limon/backup/etc/profile /etc/
     echo "[*] Done!"
 }
@@ -302,12 +302,12 @@ echo "[*] Checking integrity of configuration files..."
         diff --color=auto /limon/backup/etc/network/interfaces /etc/network/interfaces
     fi
 
-# /etc/bash/bash.bashrc
-    if ! diff -q "/limon/backup/etc/bash.bashrc" "/etc/bash.bashrc" >/dev/null; then
-        echo "[*] Changes detected in /etc/bash.bashrc"
-        echo "-------------------------------"
-        diff --color=auto /limon/backup/etc/bash.bashrc /etc/bash.bashrc
-    fi
+# # /etc/bash/bash.bashrc
+#     if ! diff -q "/limon/backup/etc/bash.bashrc" "/etc/bash.bashrc" >/dev/null; then
+#         echo "[*] Changes detected in /etc/bash.bashrc"
+#         echo "-------------------------------"
+#         diff --color=auto /limon/backup/etc/bash.bashrc /etc/bash.bashrc
+#     fi
 
 # /etc/profile
     if ! diff -q "/limon/backup/etc/profile" "/etc/profile" >/dev/null; then
