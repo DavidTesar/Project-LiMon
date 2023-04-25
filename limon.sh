@@ -135,13 +135,13 @@ rotate_info(){
         sleep 5
         clear
 
-        # Display information about aliases defined in the shell
-        echo "ALIASES:"
-        echo "--------"
+        # # Display information about aliases defined in the shell
+        # echo "ALIASES:"
+        # echo "--------"
         
-        touch /tmp/aliases
-        alias >> /tmp/aliases
-        cat /tmp/aliases
+        # touch /tmp/aliases
+        # alias >> /tmp/aliases
+        # cat /tmp/aliases
 
         echo
         sleep 5
