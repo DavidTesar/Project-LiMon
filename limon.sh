@@ -192,51 +192,131 @@ restore_integrity() {
     sudo cp /limon/backup/etc/group /etc/
     sudo cp /limon/backup/etc/hostname /etc/
     sudo cp /limon/backup/etc/hosts /etc/
-    sudo cp /limon/backup/etc/network/interfaces /etc/network/
     sudo cp /limon/backup/etc/resolv.conf /etc/
-    sudo cp /limon/backup/etc/apt/sources.list /etc/apt/
     sudo cp /limon/backup/etc/sudoers /etc/
     sudo cp /limon/backup/etc/ssh/sshd_config /etc/ssh/
     sudo cp /limon/backup/etc/sysctl.conf /etc/
     sudo cp /limon/backup/etc/logrotate.conf /etc/
     sudo cp /limon/backup/etc/crontab /etc/
-    sudo cp /limon/backup/etc/bash/bash.bashrc /etc/bash.bashrc
+
+    sudo cp /limon/backup/etc/apt/sources.list /etc/apt/
+    sudo cp /limon/backup/etc/network/interfaces /etc/network/
+    sudo cp /limon/backup/etc/bash.bashrc /etc/bash.bashrc
     sudo cp /limon/backup/etc/profile /etc/
     echo "Done!"
 }
 
 check_integrity(){
-    check_integrity() {
-        echo "[*] Checking integrity of configuration files..."
-        for file in /limon/backup/etc/*; do
-            if ! diff -q "$file" "/etc/$(basename "$file")" >/dev/null; then
-                echo "Changes detected in $(basename "$file")"
-            fi
-        done
-        for file in /limon/backup/etc/network/*; do
-            if ! diff -q "$file" "/etc/network/$(basename "$file")" >/dev/null; then
-                echo "Changes detected in $(basename "$file")"
-            fi
-        done
-        for file in /limon/backup/etc/apt/*; do
-            if ! diff -q "$file" "/etc/apt/$(basename "$file")" >/dev/null; then
-                echo "Changes detected in $(basename "$file")"
-            fi
-        done
-        for file in /limon/backup/etc/ssh/*; do
-            if ! diff -q "$file" "/etc/ssh/$(basename "$file")" >/dev/null; then
-                echo "Changes detected in $(basename "$file")"
-            fi
-        done
-        for file in /limon/backup/etc/bash/*; do
-            if ! diff -q "$file" "/etc/bash/$(basename "$file")" >/dev/null; then
-                echo "Changes detected in $(basename "$file")"
-            fi
-        done
-        echo "Done!"
-    }
+echo "[*] Checking integrity of configuration files..."
+# /etc/passwd
+    if ! diff -q "/limon/backup/etc/passwd" "/etc/passwd" >/dev/null; then
+        echo "Changes detected in /etc/passwd"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/passwd /etc/passwd
+    fi
 
+# /etc/fstab
+    if ! diff -q "/limon/backup/etc/fstab" "/etc/fstab" >/dev/null; then
+        echo "Changes detected in etc/fstab"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/fstab /etc/fstab
+    fi
+    
+# /etc/hostname
+    if ! diff -q "/limon/backup/etc/hostname" "/etc/hostname" >/dev/null; then
+        echo "Changes detected in /etc/hostname"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/hostname /etc/hostname
+    fi
+
+# /etc/group
+    if ! diff -q "/limon/backup/etc/group" "/etc/group" >/dev/null; then
+        echo "Changes detected in /etc/group"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/group /etc/group
+    fi
+
+# /etc/hosts
+    if ! diff -q "/limon/backup/etc/hosts" "/etc/hosts" >/dev/null; then
+        echo "Changes detected in /etc/hosts"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/hosts /etc/hosts
+    fi
+
+# /etc/resolv.conf
+    if ! diff -q "/limon/backup/etc/resolv.conf" "/etc/resolv.conf" >/dev/null; then
+        echo "Changes detected in /etc/resolv.conf"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/resolv.conf /etc/resolv.conf
+    fi
+
+# /etc/sudoers
+    if ! diff -q "/limon/backup/etc/sudoers" "/etc/sudoers" >/dev/null; then
+        echo "Changes detected in /etc/sudoers"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/sudoers /etc/sudoers
+    fi
+
+# /etc/ssh/sshd_config
+    if ! diff -q "/limon/backup/etc/ssh/sshd_config" "/etc/ssh/sshd_config" >/dev/null; then
+        echo "Changes detected in /etc/ssh/sshd_config"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/ssh/sshd_config /etc/ssh/sshd_config
+    fi
+
+# etc/sysctl.conf
+    if ! diff -q "/limon/backup/etc/sysctl.conf" "/etc/sysctl.conf" >/dev/null; then
+        echo "Changes detected in /etc/sysctl.conf"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/sysctl.conf /etc/sysctl.conf
+    fi
+
+# etc/logrotate.conf
+    if ! diff -q "/limon/backup/etc/logrotate.conf" "/etc/logrotate.conf" >/dev/null; then
+        echo "Changes detected in /etc/logrotate.conf"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/logrotate.conf /etc/logrotate.conf
+    fi
+
+# etc/crontab
+    if ! diff -q "/limon/backup/etc/crontab" "/etc/crontab" >/dev/null; then
+        echo "Changes detected in /etc/crontab"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/crontab /etc/crontab
+    fi
+
+# etc/apt/sources.list
+    if ! diff -q "/limon/backup/etc/apt/sources.list" "/etc/apt/sources.list" >/dev/null; then
+        echo "Changes detected in /etc/apt/sources.list"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/apt/sources.list /etc/apt/sources.list
+    fi
+
+# /etc/network/interfaces
+    if ! diff -q "/limon/backup/etc/network/interfaces" "/etc/network/interfaces" >/dev/null; then
+        echo "Changes detected in /etc/network/interfaces"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/network/interfaces /etc/network/interfaces
+    fi
+
+# /etc/bash/bash.bashrc
+    if ! diff -q "/limon/backup/etc/bash.bashrc" "/etc/bash.bashrc" >/dev/null; then
+        echo "Changes detected in /etc/bash.bashrc"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/bash.bashrc /etc/bash.bashrc
+    fi
+
+# /etc/profile
+    if ! diff -q "/limon/backup/etc/profile" "/etc/profile" >/dev/null; then
+        echo "Changes detected in /etc/profile"
+        echo "-------------------------------"
+        diff --color=auto /limon/backup/etc/profile /etc/profile
+    fi
 }
+
+
+
+
 
 generate_output(){
     echo "[*] Generating output..."
