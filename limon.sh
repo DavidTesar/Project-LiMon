@@ -101,6 +101,27 @@ rotate_info(){
         sleep 5
         clear
 
+        # Display the processes
+        echo "CURRENT PROCESSES:"
+        echo "-----------------------"
+        ps
+        sleep 5
+        clear
+
+        # Display the environment variables
+        echo "ENVIRONMENT VARIABLES:"
+        echo "-----------------------"
+        printenv | tail -19
+        sleep 5
+        clear
+
+        # Display the DNS
+        echo "DNS RESOLVING:"
+        echo "-----------------------"
+        cat /etc/resolv.conf
+        sleep 5
+        clear
+
         # Display information about current login sessions
         echo "CURRENT LOGIN SESSIONS:"
         echo "-----------------------"
@@ -219,6 +240,10 @@ check_integrity(){
 
 generate_output(){
     echo "[*] Generating output..."
+    output_dir="/limon/outputs/"
+    if [ ! -d "$output_dir" ]; then
+        mkdir "$output_dir"
+    fi
     log_file="/limon/outputs/$(date +"%Y_%m_%d_%H_%M_%S").log"
     touch "$log_file"
     check_integrity | tee "$log_file"
